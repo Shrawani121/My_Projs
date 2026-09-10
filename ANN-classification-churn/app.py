@@ -8,7 +8,7 @@ import tf_keras as keras
 
 
 # Load the trained model
-model = keras.models.load_model('ANN-classification-churn/model.h5')
+model = keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
 
 # Load the encoders and scaler
 with open('label_encoder_gender.pkl', 'rb') as file:

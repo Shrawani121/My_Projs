@@ -4,10 +4,11 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
+import tf_keras as keras
 
 
 # Load the trained model
-model = tf.keras.models.load_model('ANN-classification-churn/model.h5')
+model = keras.models.load_model('ANN-classification-churn/model.h5')
 
 # Load the encoders and scaler
 with open('label_encoder_gender.pkl', 'rb') as file:

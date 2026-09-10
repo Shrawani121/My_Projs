@@ -11,13 +11,13 @@ import tf_keras as keras
 model = keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
 
 # Load the encoders and scaler
-with open('label_encoder_gender.pkl', 'rb') as file:
+with open('ANN-classification-churn/label_encoder_gender.pkl', 'rb') as file:
     label_encoder_gender = pickle.load(file)
 
-with open('onehot_encoder_geo.pkl', 'rb') as file:
+with open('ANN-classification-churn/onehot_encoder_geo.pkl', 'rb') as file:
     onehot_encoder_geo = pickle.load(file)
 
-with open('scaler.pkl', 'rb') as file:
+with open('ANN-classification-churn/scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
 
 ## streamlit app

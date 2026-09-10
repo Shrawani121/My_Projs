@@ -5,7 +5,9 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
 import tf_keras 
+import os
 
+os.environ["TF_USE_LEGACY_KERAS"] = "1
 
 # Load the trained model
 model = tf.keras.models.load_model('ANN-classification-churn/model.keras')

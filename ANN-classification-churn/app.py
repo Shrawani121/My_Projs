@@ -4,13 +4,12 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
-import tf_keras as keras 
 import os
 
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
 
 # Load the trained model
-model = keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
+model = tf.keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
 
 # Load the encoders and scaler
 with open('ANN-classification-churn/label_encoder_gender.pkl', 'rb') as file:
@@ -60,10 +59,13 @@ input_data = pd.concat([input_data.reset_index(drop=True), geo_encoded_df], axis
 #Scale the input data
 input_data_scaled = scaler.transform(input_data)
 
-# Predict churn probability
-churn_probability = model.predict(input_data_scaled)[0][0]  
+# Predict churn
+prediction = model.predict(input_data_scaled)
+prediction_proba = prediction[0][0]
 
-if churn_probability > 0.5:
-    st.write(f'The customer is likely to churn with a probability of {churn_probability:.2f}.') 
+st.write(f'Churn Probability: {prediction_proba:.2f}')
+
+if prediction_proba > 0.5:
+    st.write('The customer is likely to churn.')
 else:
-    st.write(f'The customer is unlikely to churn with a probability of {churn_probability:.2f}.')
+    st.write('The customer is not likely to churn.')

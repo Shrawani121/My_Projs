@@ -4,11 +4,8 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
-import os
 
-os.environ["TF_USE_LEGACY_KERAS"] = "1"
-
-# Load the trained model
+# Load the trained model using tf.keras
 model = tf.keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
 
 # Load the encoders and scaler
@@ -21,7 +18,7 @@ with open('ANN-classification-churn/onehot_encoder_geo.pkl', 'rb') as file:
 with open('ANN-classification-churn/scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
 
-## streamlit app
+## Streamlit app UI
 st.title('Customer Churn Prediction')
 
 # User input
@@ -49,14 +46,14 @@ input_data = pd.DataFrame({
     'EstimatedSalary': [estimated_salary]
 })
 
-#One hot encode 'Geography'
+# One-hot encode 'Geography'
 geo_encoded = onehot_encoder_geo.transform([[geography]]).toarray()
 geo_encoded_df = pd.DataFrame(geo_encoded, columns=onehot_encoder_geo.get_feature_names_out(['Geography']))
 
 # Combine one-hot encoded columns with input data
-input_data = pd.concat([input_data.reset_index(drop=True), geo_encoded_df], axis=1) 
+input_data = pd.concat([input_data.reset_index(drop=True), geo_encoded_df], axis=1)
 
-#Scale the input data
+# Scale the input data
 input_data_scaled = scaler.transform(input_data)
 
 # Predict churn

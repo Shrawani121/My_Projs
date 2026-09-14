@@ -1,3 +1,6 @@
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -5,7 +8,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
 
-# Load the trained model using tf.keras
+# Load the trained model
 model = tf.keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
 
 # Load the encoders and scaler
@@ -18,7 +21,7 @@ with open('ANN-classification-churn/onehot_encoder_geo.pkl', 'rb') as file:
 with open('ANN-classification-churn/scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
 
-## Streamlit app UI
+## streamlit app
 st.title('Customer Churn Prediction')
 
 # User input

@@ -1,6 +1,3 @@
-import os
-os.environ["TF_USE_LEGACY_KERAS"] = "1"
-
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -21,7 +18,7 @@ with open('ANN-classification-churn/onehot_encoder_geo.pkl', 'rb') as file:
 with open('ANN-classification-churn/scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
 
-## streamlit app
+## Streamlit app UI
 st.title('Customer Churn Prediction')
 
 # User input

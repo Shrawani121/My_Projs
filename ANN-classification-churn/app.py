@@ -6,7 +6,7 @@ import pandas as pd
 import pickle
 
 # Load the trained model
-model = tf.keras.models.load_model('ANN-classification-churn/model.h5', compile=False)
+model = tf.keras.models.load_model('ANN-classification-churn/model.keras', compile=False)
 
 # Load the encoders and scaler
 with open('ANN-classification-churn/label_encoder_gender.pkl', 'rb') as file:
